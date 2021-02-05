@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    body{
+     position: relative;
+        width: 1440px;
+        height: 1024px;
+
+        background: linear-gradient(180deg, #FFFFFF 26.04%, rgba(255, 255, 255, 0) 40.63%), #3FFACD;
+
+    }
+
+    #Dinput{
+    margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+    text-align:center;
+    margin-bottom:2rem;
+    }
+
+    #Doutput{
+    margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+    text-align:center
+
+    }
+
+
+
+
+    </style>
+</head>
+<body>
+<div id="Dinput">
+     <label for="input"><h1>Input</h1></label>
+    <div>
+        <textarea id="input" name="Input" cols="70" rows="10"></textarea>
+    </div>
+</div>
+
+<div>
+<button id="btn">Click me!</button>
+</div>
+
+<div id="Doutput">
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $("#btn").click(function (e){
+    var input=$("#input").val();
+    $.ajax({
+        url:'/',
+        type:'POST',
+        data:{'input':input},
+        success: function(response){
+                console.log(response);
+        },
+        error: function(error){
+            console.log("error aaya hai");
+        }
+    });
+    e.preventDefault()
+
+
+}
+)
+</script>
+</body>
+</html>
