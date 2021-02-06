@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Text-Summarizer</title>
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&display=swap');
     body{
      position: relative;
-        width: 1440px;
+        width: auto;
         height: 1024px;
-
+        margin:0px;
         background: linear-gradient(180deg, #FFFFFF 26.04%, rgba(255, 255, 255, 0) 40.63%), #3FFACD;
 
     }
@@ -20,6 +21,7 @@
   padding: 10px;
     text-align:center;
     margin-bottom:2rem;
+    margin-top:1rem;
     }
 
     #Doutput{
@@ -27,8 +29,48 @@
   width: 50%;
   border: 3px solid green;
   padding: 10px;
-    text-align:center
+    text-align:center;
+    margin-top:1rem;
 
+    }
+
+    #button{
+    text-align: center;
+    }
+
+    button{
+    padding:0.7rem 0.5rem;
+    border-radius:10px;
+    font-size: 16px;
+    background-color:#73fc73;
+    }
+
+    #nav{
+    padding:3rem 0rem;
+    background-color:#73fc73;
+
+    }
+
+    .Title{
+    font-weight: bold;
+    font-size: 2rem;
+    text-align:center;
+   font-family: cursive;
+
+    }
+
+    #inputheader{
+    font-weight: 400;
+    font-size: 2rem;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+    #outputheader{
+     font-weight: 400;
+    font-size: 2rem;
+    text-align: center;
+    font-family: sans-serif;
     }
 
 
@@ -37,16 +79,24 @@
     </style>
 </head>
 <body>
+
+<nav id="nav">
+    <div class="Title">TextSummarizer</div>
+</nav>
+
+
 <div id="Dinput">
-     <label for="input"><h1>Input</h1></label>
+     <label for="input"><h1 id="inputheader">Input</h1></label>
     <div>
         <textarea id="input" name="Input" cols="70" rows="10"></textarea>
     </div>
 </div>
 
-<div>
-<button id="btn">Click me!</button>
+<div id="button">
+<button id="btn">Summarize!</button>
 </div>
+
+<h2 id="outputheader">Output</h2>
 
 <div id="Doutput">
 
@@ -61,9 +111,11 @@
         type:'POST',
         data:{'input':input},
         success: function(response){
-                console.log(response);
+                $('#Doutput').text(response.message);
+                console.log(response.message);
         },
         error: function(error){
+        $('#Doutput').text(" ");
             console.log("error aaya hai");
         }
     });
