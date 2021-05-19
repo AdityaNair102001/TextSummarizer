@@ -92,8 +92,19 @@
     </div>
 </div>
 
+<button id="prm">timepass</button>
+
 <div id="button">
-<button id="btn">Summarize!</button>
+     <button id="btn">Summarize!</button>
+    <button id="translate-btn">Translate!</button>
+
+    <select id="language" name="language">
+    <option value="catalan">Catalan</option>
+    <option value="french">french</option>
+    <option value="malayalam">Malayalam</option>
+    <option value="marathi">Marathi</option>
+  </select>
+
 </div>
 
 <h2 id="outputheader">Output</h2>
@@ -105,6 +116,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $("#btn").click(function (e){
+    console.log(e)
+    alert("Hi!");
     var input=$("#input").val();
     $.ajax({
         url:'/',
@@ -112,7 +125,6 @@
         data:{'input':input},
         success: function(response){
                 $('#Doutput').text(response.message);
-                console.log(response.message);
         },
         error: function(error){
         $('#Doutput').text(" ");
@@ -120,10 +132,47 @@
         }
     });
     e.preventDefault()
-
-
-}
-)
+    })
 </script>
+
+<script>
+ $("#translate-btn").click(function (e){
+  alert("Hi!");
+  console.log("translate!");
+    var language=$("#language").val();
+     var input=$("#input").val();
+     alert(language);
+    $.ajax({
+        url:'/translate',
+        type:'POST',
+        data:{'input':input,'language':language},
+        success:function(response){
+                $('#Doutput').text(response.result);
+                console.log(response.result)
+                 },
+          error: function(error){
+            $('#Doutput').text("Error hai Bhava");
+            console.log("error aaya hai");
+        }
+    });
+    e.preventDefault()
+
+    }
+    )
+
+</script>
+
+
+<!--<script>-->
+<!--    var summarize_btn=document.querySelector("#btn");-->
+<!--    var input=document.querySelector("#input");-->
+<!--    summarize_btn.addEventListener("click", ()=>{-->
+<!--        alert("Hi");-->
+<!--        console.log("hello")-->
+<!--       fetch('http://127.0.0.1:5000/',{method:'POST',body:JSON.stringify(input)})-->
+<!--       .then(response => response.json())-->
+<!--       .then(data => console.log(data));-->
+<!--    });-->
+<!--</script>-->
 </body>
 </html>
